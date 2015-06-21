@@ -327,13 +327,21 @@ CodeMirror.defineMode("liquid", function(config, parserConfig) {
 });
 CodeMirror.defineMIME("application/x-liquid-template", "liquid");
 
-CodeMirror.defineMode("htmlmixedliquid", function(config, parserConfig) {
+CodeMirror.defineMode("liquid-html", function(config, parserConfig) {
   return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "text/html"), CodeMirror.getMode(config, parserConfig.overlay || "application/x-liquid-template"));
+});
+
+CodeMirror.defineMode("liquid-x-scss", function(config, parserConfig) {
+  return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "text/x-scss"), CodeMirror.getMode(config, parserConfig.overlay || "application/x-liquid-template"));
+});
+
+CodeMirror.defineMode("liquid-javascript", function(config, parserConfig) {
+  return CodeMirror.overlayMode(CodeMirror.getMode(config, parserConfig.backdrop || "application/javascript"), CodeMirror.getMode(config, parserConfig.overlay || "application/x-liquid-template"));
 });
 
 // Compatibility with CodeMirror's formatting addon
 if (CodeMirror.modeExtensions){
-  CodeMirror.modeExtensions["htmlmixedliquid"] = CodeMirror.modeExtensions["htmlmixed"];
+  CodeMirror.modeExtensions["liquid-html"] = CodeMirror.modeExtensions["htmlmixed"];
 
   // If the current mode is 'htmlmixed', returns the extension of a mode located at
   // the specified position (can be htmlmixed, css or javascript). Otherwise, simply
